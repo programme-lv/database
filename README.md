@@ -29,3 +29,15 @@ psql -h localhost -p 5432 -U proglv -d proglv
 ## database migrations
 
 We use [Flyway](https://flywaydb.org/) to manage database migrations. The migrations are located in the `flyway-migrations` folder.
+
+To run migrations, if you have docker installed, you can run the following command:
+
+```bash
+migrate.sh
+```
+
+alternatively you can install flyway on your machine and run just the following command:
+
+```bash
+flyway migrate
+```
