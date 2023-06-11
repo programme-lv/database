@@ -16,8 +16,9 @@ will start a local database on port 5432 with the user `proglv` and the password
 
 ## connecting to the database
 
-Personally, I use JetBrains DataGrip to connect to the database. You can download it [here](https://www.jetbrains.com/datagrip/).
-You can also use dbeaver, which is free and open source. You can download it [here](https://dbeaver.io/).
+Personally, I use JetBrains DataGrip to connect to the database. Get DataGrip [here](https://www.jetbrains.com/datagrip/).
+
+You can also use dbeaver, which is free and open source. Get dbeaver [here](https://dbeaver.io/).
 
 Or you can use the command line:
 
