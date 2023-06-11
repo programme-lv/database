@@ -5,6 +5,7 @@ The repository contains website's database schema, migrations and diagrams.
 ## starting a local database
 
 The folder `local-proglv-db` contains a docker-compose file that will start a local database.
+
 Alternatively, you can start a local database using the following command:
 
 ```bash
