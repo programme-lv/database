@@ -1,5 +1,7 @@
 # programme.lv database
 
+The repository contains website's database schema, migrations and diagrams.
+
 ## starting a local database
 
 The folder `local-proglv-db` contains a docker-compose file that will start a local database.
