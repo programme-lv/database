@@ -1,0 +1,18 @@
+version: '3.1'
+
+services:
+
+  postgres:
+    image: postgres:latest
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: proglv
+      POSTGRES_USER: proglv
+      POSTGRES_DB: proglv
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
