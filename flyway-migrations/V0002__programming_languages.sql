@@ -1,9 +1,8 @@
 CREATE TABLE programming_languages (
-    id TEXT NOT NULL,
-    full_name TEXT NOT NULL,
-    code_filename TEXT NOT NULL,
+    id TEXT PRIMARY KEY,
+    full_name TEXT NOT NULL UNIQUE,
+    code_filename TEXT NOT NULL, -- how the submitted code should be named
     compile_cmd TEXT,
     execute_cmd TEXT NOT NULL,
-    CONSTRAINT programming_languages_pkey PRIMARY KEY (id),
-    CONSTRAINT programming_languages_name_key UNIQUE (full_name)
+    env_version_cmd TEXT -- command to get version of the compiler / interpreter
 );
