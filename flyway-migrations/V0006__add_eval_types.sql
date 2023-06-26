@@ -1,4 +1,4 @@
-INSERT INTO eval_types (id, en_description)
+INSERT INTO eval_types (id, description_en)
 VALUES (
         'simple',
         'Predetermined stdin with one and only one correct stdout.'
