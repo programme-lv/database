@@ -7,7 +7,7 @@ CREATE TABLE task_versions (
     time_lim_ms BIGINT NOT NULL,
     mem_lim_kb BIGINT NOT NULL,
 
-    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL DEFAULT NOW(),
     updated_at TIMESTAMP WITH TIME ZONE,
 
     CONSTRAINT task_versions_task_id_version_name_unique UNIQUE (task_id, version_name)
