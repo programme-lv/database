@@ -4,7 +4,7 @@ VALUES (
         'Predetermined stdin with one and only one correct stdout.'
     ),
     (
-        'multi-answer',
+        'checker',
         'Predetermined stdin with one or more correct std outputs. Output checked by checker.'
     ),
     (
