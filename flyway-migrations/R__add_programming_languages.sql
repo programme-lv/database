@@ -17,3 +17,11 @@ INSERT INTO programming_languages
     }
 }', 'java');
 
+INSERT INTO programming_languages
+    VALUES ('go1.19', 'Go 1.19', 'main.go', 'go build main.go', './main', 'go version',
+    e'package main
+import "fmt"
+func main() {
+    fmt.Println("Hello, World!")
+}', 'go');
+
