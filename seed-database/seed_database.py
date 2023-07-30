@@ -47,11 +47,17 @@ try:
     type_id = problem_toml['type']
     authors = problem_toml['authors']
 
+    eval_dir = f'{TASK_DIR}/evaluation'
+    checker_filename = f'{eval_dir}/checker.cpp'
+    with open(checker_filename, 'r') as f:
+        checker_code = f.read()
+
     task_id = dbi.create_task(cur, admin_id)
     print(f'Task ID: {task_id}')
 
     version_id = dbi.create_version(cur, task_id, code, name,
-                                    time_ms, memory_kb, type_id)
+                                    time_ms, memory_kb, type_id,
+                                    None, checker_code, None)
 
     print(f'Version ID: {version_id}')
 

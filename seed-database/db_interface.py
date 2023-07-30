@@ -65,16 +65,17 @@ def update_task(cursor, task_id, created_by_id,
 
 
 def create_version(cursor, task_id, short_code, full_name,
-                   time_lim_ms, mem_lim_kb, testing_type_id, origin=None):
+                   time_lim_ms, mem_lim_kb, testing_type_id, origin=None,
+                   checker=None, interactor=None):
     '''Creates a new task version and returns its ID'''
     cursor.execute('''
         INSERT INTO task_versions
         (task_id, short_code, full_name, time_lim_ms, mem_lim_kb,
-        testing_type_id, origin)
-        VALUES (%s, %s, %s, %s, %s, %s, %s)
+        testing_type_id, origin, checker, interactor)
+        VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
         RETURNING id
     ''', (task_id, short_code, full_name, time_lim_ms, mem_lim_kb,
-          testing_type_id, origin))
+          testing_type_id, origin, checker, interactor))
     return cursor.fetchone()[0]
 
 
