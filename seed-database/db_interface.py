@@ -130,3 +130,18 @@ def create_textfile(cursor, sha256, content):
         RETURNING id
     ''', (sha256, content))
     return cursor.fetchone()[0]
+
+
+def create_version_test(cursor, task_version_id,
+                        input_text_file_id, answer_text_file_id,
+                        test_filename=""):
+    '''Link task version with test and returns its ID'''
+    cursor.execute('''
+        INSERT INTO task_version_tests
+        (task_version_id, input_text_file_id, answer_text_file_id,
+        test_filename)
+        VALUES (%s, %s, %s, %s)
+        RETURNING id
+    ''', (task_version_id, input_text_file_id, answer_text_file_id,
+          test_filename))
+    return cursor.fetchone()[0]

@@ -83,16 +83,11 @@ try:
     for filename in os.listdir(test_dir):
         testnames.add(filename.split('.')[0])
 
-    # read text file of testname.in, testname.ans
-    # hash with sha256 their contents
-    # if they exist, get their ids
-    # otherwise create new ones
-    # link them to the version
-    # 1) get hash
-    # 2) hash exists?
-    # 3) yes -> get id
-    # 4) no -> create new
-    # 5) link to version
+    # 1) get test file content hash
+    # 2) db textfile with hash exists?
+    # 3) yes -> get existing id
+    # 4) no -> create new textfile entry
+    # 5) link to version through task_version_tests
 
     for testname in testnames:
         in_filename = f'{test_dir}/{testname}.in'
@@ -117,6 +112,8 @@ try:
             with open(ans_filename, 'r') as f:
                 ans_id = dbi.create_textfile(cur, ans_hash, f.read())
 
+        dbi.create_version_test(cur, version_id, in_id, ans_id, testname)
+        print(f'Test {testname} added.')
 
     conn.commit()
 except Exception as e:
