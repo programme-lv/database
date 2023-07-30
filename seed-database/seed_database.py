@@ -2,6 +2,7 @@ import psycopg2
 import db_interface as dbi
 import utils
 import toml
+import os
 
 DB_HOST = 'localhost'
 DB_PORT = 5432
@@ -44,6 +45,7 @@ try:
     time_ms = problem_toml['time']*1000
     memory_kb = problem_toml['memory']*1024
     type_id = problem_toml['type']
+    authors = problem_toml['authors']
 
     task_id = dbi.create_task(cur, admin_id)
     print(f'Task ID: {task_id}')
@@ -71,6 +73,15 @@ try:
                                               md_contents['output'],
                                               None, None, version_id)
     print(f'MD Statement ID: {md_statement_id}')
+
+    for author in authors:
+        dbi.create_version_author(cur, version_id, author)
+    print('Authors added.')
+
+    test_dir = f'{TASK_DIR}/tests'
+    testnames = set()
+    for filename in os.listdir(test_dir):
+        testnames.add(filename.split('.')[0])
 
     conn.commit()
 except Exception as e:

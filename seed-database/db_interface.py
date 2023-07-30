@@ -91,12 +91,10 @@ def create_md_statement(cursor,
     return cursor.fetchone()[0]
 
 
-def create_version_author(cursor, version_id, author_id):
-    '''Create a new version_author and returns its ID'''
+def create_version_author(cursor, task_version_id, author):
+    '''Create a new task version author entry'''
     cursor.execute('''
         INSERT INTO version_authors
-        (version_id, author_id)
+        (task_version_id, author)
         VALUES (%s, %s)
-        RETURNING id
-    ''', (version_id, author_id))
-    return cursor.fetchone()[0]
+    ''', (task_version_id, author))
