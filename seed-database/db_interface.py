@@ -76,3 +76,27 @@ def create_version(cursor, task_id, short_code, full_name,
     ''', (task_id, short_code, full_name, time_lim_ms, mem_lim_kb,
           testing_type_id, origin))
     return cursor.fetchone()[0]
+
+
+def create_md_statement(cursor,
+                        story, input, output, notes, scoring,
+                        task_version_id):
+    '''Create a new markdown_statement and returns its ID'''
+    cursor.execute('''
+        INSERT INTO markdown_statements
+        (story, input, output, notes, scoring, task_version_id)
+        VALUES (%s, %s, %s, %s, %s, %s)
+        RETURNING id
+    ''', (story, input, output, notes, scoring, task_version_id))
+    return cursor.fetchone()[0]
+
+
+def create_version_author(cursor, version_id, author_id):
+    '''Create a new version_author and returns its ID'''
+    cursor.execute('''
+        INSERT INTO version_authors
+        (version_id, author_id)
+        VALUES (%s, %s)
+        RETURNING id
+    ''', (version_id, author_id))
+    return cursor.fetchone()[0]

@@ -55,6 +55,23 @@ try:
 
     dbi.update_task(cur, task_id, admin_id, version_id, None)
 
+    md_statement_dir = f'{TASK_DIR}/statements'
+    md_files = dict()
+    md_files['input'] = f'{md_statement_dir}/input.md'
+    md_files['output'] = f'{md_statement_dir}/output.md'
+    md_files['story'] = f'{md_statement_dir}/story.md'
+    md_contents = dict()
+    for key, value in md_files.items():
+        with open(value, 'r') as f:
+            md_contents[key] = f.read()
+
+    md_statement_id = dbi.create_md_statement(cur,
+                                              md_contents['story'],
+                                              md_contents['input'],
+                                              md_contents['output'],
+                                              None, None, version_id)
+    print(f'MD Statement ID: {md_statement_id}')
+
     conn.commit()
 except Exception as e:
     print(f"Error: {e}")
