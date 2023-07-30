@@ -98,3 +98,35 @@ def create_version_author(cursor, task_version_id, author):
         (task_version_id, author)
         VALUES (%s, %s)
     ''', (task_version_id, author))
+
+
+def textfile_exists(cursor, sha256):
+    '''Returns True if a text file with the given sha256 exists'''
+    cursor.execute('''
+        SELECT EXISTS(
+            SELECT 1
+            FROM text_files
+            WHERE sha256 = %s
+        )
+    ''', (sha256,))
+    return cursor.fetchone()[0]
+
+
+def get_textfile_id(cursor, sha256):
+    '''Returns the ID of a text file with the given sha256'''
+    cursor.execute('''
+        SELECT id FROM text_files
+        WHERE sha256 = %s
+    ''', (sha256,))
+    return cursor.fetchone()[0]
+
+
+def create_textfile(cursor, sha256, content):
+    '''Creates a new text file and returns its ID'''
+    cursor.execute('''
+        INSERT INTO text_files
+        (sha256, content)
+        VALUES (%s, %s)
+        RETURNING id
+    ''', (sha256, content))
+    return cursor.fetchone()[0]

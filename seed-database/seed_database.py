@@ -30,7 +30,7 @@ def ensure_admin_exists(cur):
     else:
         print('Creating admin user.')
         return dbi.create_user(cur, ADMIN_USERNAME, ADMIN_EMAIL,
-                               utils.hash_password(ADMIN_PASSWORD),
+                               utils.bcrypt_password(ADMIN_PASSWORD),
                                ADMIN_FIRSTNAME, ADMIN_LASTNAME, True)
 
 
@@ -82,6 +82,41 @@ try:
     testnames = set()
     for filename in os.listdir(test_dir):
         testnames.add(filename.split('.')[0])
+
+    # read text file of testname.in, testname.ans
+    # hash with sha256 their contents
+    # if they exist, get their ids
+    # otherwise create new ones
+    # link them to the version
+    # 1) get hash
+    # 2) hash exists?
+    # 3) yes -> get id
+    # 4) no -> create new
+    # 5) link to version
+
+    for testname in testnames:
+        in_filename = f'{test_dir}/{testname}.in'
+        print(f'Processing {in_filename}')
+        in_hash = utils.sha256_file(in_filename)
+        if dbi.textfile_exists(cur, in_hash):
+            print('Textfile already exists. Fetching ID.')
+            in_id = dbi.get_textfile_id(cur, in_hash)
+        else:
+            print(f'Creating new textfile with hash {in_hash}')
+            with open(in_filename, 'r') as f:
+                in_id = dbi.create_textfile(cur, in_hash, f.read())
+        ans_filename = f'{test_dir}/{testname}.ans'
+
+        print(f'Processing {ans_filename}')
+        ans_hash = utils.sha256_file(ans_filename)
+        if dbi.textfile_exists(cur, ans_hash):
+            print('Textfile already exists. Fetching ID.')
+            ans_id = dbi.get_textfile_id(cur, ans_hash)
+        else:
+            print(f'Creating new textfile with hash {ans_hash}')
+            with open(ans_filename, 'r') as f:
+                ans_id = dbi.create_textfile(cur, ans_hash, f.read())
+
 
     conn.commit()
 except Exception as e:
