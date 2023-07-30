@@ -22,16 +22,28 @@ dbname={DB_NAME} user={DB_USER} password={DB_PASS}
 """)
 
 
-def ensure_admin_exists(cur):
+def ensure_admin_exists(cursor):
     '''Ensures that the admin user exists'''
-    if dbi.user_exists(cur, ADMIN_USERNAME):
+    if dbi.user_exists(cursor, ADMIN_USERNAME):
         print('Admin user already exists. Fetching ID.')
-        return dbi.get_user_id(cur, ADMIN_USERNAME)
+        return dbi.get_user_id(cursor, ADMIN_USERNAME)
     else:
         print('Creating admin user.')
-        return dbi.create_user(cur, ADMIN_USERNAME, ADMIN_EMAIL,
+        return dbi.create_user(cursor, ADMIN_USERNAME, ADMIN_EMAIL,
                                utils.bcrypt_password(ADMIN_PASSWORD),
                                ADMIN_FIRSTNAME, ADMIN_LASTNAME, True)
+
+
+def ensure_textfile(cursor, filename):
+    '''Ensure db has text_file entry and return its id'''
+    file_hash = utils.sha256_file(filename)
+    if dbi.textfile_exists(cursor, file_hash):
+        print('Textfile already exists. Fetching ID.')
+        return dbi.get_textfile_id(cursor, file_hash)
+    else:
+        print(f'Creating new textfile with hash {file_hash}')
+        with open(filename, 'r') as f:
+            return dbi.create_textfile(cursor, file_hash, f.read())
 
 
 try:
@@ -49,15 +61,14 @@ try:
 
     eval_dir = f'{TASK_DIR}/evaluation'
     checker_filename = f'{eval_dir}/checker.cpp'
-    with open(checker_filename, 'r') as f:
-        checker_code = f.read()
+    checker_id = ensure_textfile(cur, checker_filename)
 
     task_id = dbi.create_task(cur, admin_id)
     print(f'Task ID: {task_id}')
 
     version_id = dbi.create_version(cur, task_id, code, name,
                                     time_ms, memory_kb, type_id,
-                                    None, checker_code, None)
+                                    None, checker_id, None)
 
     print(f'Version ID: {version_id}')
 
@@ -89,34 +100,14 @@ try:
     for filename in os.listdir(test_dir):
         testnames.add(filename.split('.')[0])
 
-    # 1) get test file content hash
-    # 2) db textfile with hash exists?
-    # 3) yes -> get existing id
-    # 4) no -> create new textfile entry
-    # 5) link to version through task_version_tests
-
     for testname in testnames:
         in_filename = f'{test_dir}/{testname}.in'
         print(f'Processing {in_filename}')
-        in_hash = utils.sha256_file(in_filename)
-        if dbi.textfile_exists(cur, in_hash):
-            print('Textfile already exists. Fetching ID.')
-            in_id = dbi.get_textfile_id(cur, in_hash)
-        else:
-            print(f'Creating new textfile with hash {in_hash}')
-            with open(in_filename, 'r') as f:
-                in_id = dbi.create_textfile(cur, in_hash, f.read())
-        ans_filename = f'{test_dir}/{testname}.ans'
+        in_id = ensure_textfile(cur, in_filename)
 
+        ans_filename = f'{test_dir}/{testname}.ans'
         print(f'Processing {ans_filename}')
-        ans_hash = utils.sha256_file(ans_filename)
-        if dbi.textfile_exists(cur, ans_hash):
-            print('Textfile already exists. Fetching ID.')
-            ans_id = dbi.get_textfile_id(cur, ans_hash)
-        else:
-            print(f'Creating new textfile with hash {ans_hash}')
-            with open(ans_filename, 'r') as f:
-                ans_id = dbi.create_textfile(cur, ans_hash, f.read())
+        ans_id = ensure_textfile(cur, ans_filename)
 
         dbi.create_version_test(cur, version_id, in_id, ans_id, testname)
         print(f'Test {testname} added.')
