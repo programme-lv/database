@@ -2,7 +2,7 @@ code = "summa"
 name = "Summa"
 version = 1
 
-authors = ["Krišjānis Petručeņa"]
+authors = ["Krišjānis Petručeņa", "Antons Maizītis"]
 tags = ["math"]
 
 type = "simple"
