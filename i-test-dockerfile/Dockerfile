@@ -2,7 +2,7 @@ FROM postgres:15.4
 
 # Update the package list and install wget
 RUN apt-get update \
-    && apt-get install -y wget git \
+    && apt-get install -y wget git iproute2\
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
