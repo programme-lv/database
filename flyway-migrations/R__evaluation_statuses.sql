@@ -4,6 +4,7 @@ INSERT INTO evaluation_statuses
 VALUES
 -- SUBMISSION SCOPE
 ('IQ', 'in queue', 'gaida rindā', '(submission)'),
+('R', 'received', 'saņemts', '(submission)'),
 ('C', 'compiling', 'tiek kompilēts', '(submission)'),
 ('T', 'testing', 'tiek testēts', '(submission)'),
 ('F', 'finished', 'pabeigts', '(submission)'),
