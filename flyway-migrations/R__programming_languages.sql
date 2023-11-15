@@ -6,7 +6,7 @@ INSERT INTO programming_languages
 int main() { std::cout << "Hello, World!"; }', 'cpp', 'main');
 
 INSERT INTO programming_languages
-    VALUES ('python3.11', 'Python 3.11', 'main.py', null, 'python3.11 main.py', 'python3.11 --version',
+    VALUES ('python3.10', 'Python 3.10', 'main.py', null, 'python3.10 main.py', 'python3.10 --version',
     'print("Hello, World!")', 'python', null);
 
 INSERT INTO programming_languages
