@@ -22,7 +22,7 @@ func main() {
 }', 'go', 'main', true);
 
 INSERT INTO public.programming_languages (id, full_name, code_filename, compile_cmd, execute_cmd, env_version_cmd, hello_world_code, monaco_id, compiled_filename, enabled)
-VALUES ('cpp17', 'C++17 (GNU G++) asdf', 'main.cpp', 'g++ -std=c++17 -o main main.cpp', './main', 'g++ --version', e'#include <iostream>
+VALUES ('cpp17', 'C++17 (GNU G++)', 'main.cpp', 'g++ -std=c++17 -o main main.cpp', './main', 'g++ --version', e'#include <iostream>
 int main() { std::cout << "Hello, World!" << std::endl; }', 'cpp', 'main', true);
 
 
