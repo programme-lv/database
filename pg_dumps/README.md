@@ -1,0 +1,1 @@
+Postgres data dumps are encrypted. Ask Krišjānis the password.
