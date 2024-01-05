@@ -3,7 +3,7 @@
 The repository contains website's database schema, migrations and diagrams.
 
 
-## starting a local database
+## starting a local database (Outdated)
 
 The folder `local-proglv-db` contains a docker-compose file that will start a local database.
 
@@ -15,7 +15,7 @@ docker run -d --name proglv-db -p 5432:5432 -e POSTGRES_PASSWORD=proglv -e POSTG
 
 Both the command and the compose file will start a local database on port 5432 with the user `proglv` and the password `proglv`.
 
-## connecting to the database
+## connecting to the database (Outdated)
 
 Personally, I use JetBrains DataGrip to connect to the database. Get DataGrip [here](https://www.jetbrains.com/datagrip/).
 
@@ -27,7 +27,7 @@ Or you can use the command line:
 psql -h localhost -p 5432 -U proglv -d proglv
 ```
 
-## database migrations
+## database migrations (Outdated)
 
 We use [Flyway](https://flywaydb.org/) to manage database migrations. The migrations are located in the `flyway-migrations` folder.
 
