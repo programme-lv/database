@@ -1,0 +1,1 @@
+ALTER TABLE text_files ALTER COLUMN content DROP NOT NULL;
