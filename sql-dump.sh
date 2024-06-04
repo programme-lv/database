@@ -3,7 +3,7 @@
 set -ex # Exit on error and print commands
 
 # Define variables
-DB_CONTAINER_NAME="postgres_db_3"
+DB_CONTAINER_NAME="postgres_db_4"
 DB_NAME="second_database"
 DB_USER="postgres"
 DB_PASSWORD="yourpassword"
@@ -63,5 +63,5 @@ docker run --rm -it --network=host \
 echo "Flyway migration completed."
 
 # Dump the database to a file
-docker exec -t "$DB_CONTAINER_NAME" pg_dump -U "$DB_USER" --no-owner "$DB_NAME" > "$DUMP_FILE"
+docker exec -t "$DB_CONTAINER_NAME" pg_dump --schema-only --no-owner --no-privileges --no-owner -U "$DB_USER" "$DB_NAME" > "$DUMP_FILE"
 echo "Database dump completed. Dump file: $DUMP_FILE"
