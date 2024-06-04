@@ -63,5 +63,5 @@ docker run --rm -it --network=host \
 echo "Flyway migration completed."
 
 # Dump the database to a file
-docker exec -t "$DB_CONTAINER_NAME" pg_dump -U "$DB_USER" "$DB_NAME" > "$DUMP_FILE"
+docker exec -t "$DB_CONTAINER_NAME" pg_dump "$DB_NAME" > "$DUMP_FILE"
 echo "Database dump completed. Dump file: $DUMP_FILE"
