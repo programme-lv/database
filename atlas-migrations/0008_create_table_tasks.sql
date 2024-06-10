@@ -1,0 +1,5 @@
+CREATE TABLE tasks (
+    id BIGSERIAL PRIMARY KEY,
+    created_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    created_by BIGINT NOT NULL REFERENCES users
+);
