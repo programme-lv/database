@@ -1,2 +1,0 @@
-ALTER TABLE task_versions DROP CONSTRAINT task_versions_short_code_key;
-ALTER TABLE task_versions DROP CONSTRAINT task_versions_full_name_key;

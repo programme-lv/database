@@ -1,3 +1,5 @@
 report.json
 report.html
 flyway.prod.conf
+prod-db.dump
+secrets.txt
