@@ -1,4 +1,4 @@
-h1:eYowBPzXcE+hAHjl+xg5wQ5n97oe+l7npSGdjkWrtLQ=
+h1:QjSZgRcOGeyu60GWVgPHZ6aOvBJUVMxO/05OsrI64Wg=
 0001_create_table_users.sql h1:7vPNTKWc/OOehZpZqi19632oez+WJ2e3gg0/FCEaEDI=
 0002_programming_languages.sql h1:ysHtHIW9s5IEZj/mVPiQ9vlI1EWZoCU1gcfiiKW3KUI=
 0003_add_programming_langs.sql h1:s2rWTYar3ZA0AYezxLERjOGKSL5PIpW2CkWg4TavYZg=
@@ -92,3 +92,4 @@ h1:eYowBPzXcE+hAHjl+xg5wQ5n97oe+l7npSGdjkWrtLQ=
 20240610195407_test_atlas.sql h1:n0qkXxf9QgLc9qlLhk7Ini5LglFfXtlSs1cpz/XDJQA=
 20240630081809_create_sessions_table.sql h1:2sdoZCBT5uDX1Br8tBhB/H/KGtYkvNzI+kO2r/DXj9E=
 20240630105034_submission_uuids.sql h1:fIpUjJyiiDsjl3iyUMc8qXWupVB5UfNFJtZqZqNcdqA=
+20240630114010_not_null_subm_id_ref.sql h1:+782+WOisV70bYvE0w14HcfuFsnBhqFk/9EY3sneEuM=
