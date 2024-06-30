@@ -1,4 +1,4 @@
-env {
+env "prod" {
   name = atlas.env
   url  = getenv("DATABASE_URL")
   migration {
